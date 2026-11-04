@@ -1,5 +1,5 @@
 (function () {
-  const USERNAME = 'clementezeusgabriel01-iswrtg';
+  const USERNAME = 'ClementeZeus';
   const AUTO_REFRESH_MINUTES = 5;
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
@@ -516,4 +516,5 @@
 
   document.addEventListener('DOMContentLoaded', loadDashboard);
 })();
+
       
