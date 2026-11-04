@@ -1,14 +1,13 @@
-module.exports = async function handler(req, res) {
-  const path = req.query.path;
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const path = searchParams.get('path');
 
   if (!path) {
-    res.status(400).json({ error: 'Missing path parameter' });
-    return;
+    return Response.json({ error: 'Missing path parameter' }, { status: 400 });
   }
 
   if (!process.env.GITHUB_TOKEN) {
-    res.status(500).json({ error: 'GITHUB_TOKEN is not set in the Vercel project environment variables' });
-    return;
+    return Response.json({ error: 'GITHUB_TOKEN is not set' }, { status: 500 });
   }
 
   try {
@@ -19,13 +18,15 @@ module.exports = async function handler(req, res) {
       }
     });
 
-    const text = await response.text();
-    res
-      .status(response.status)
-      .setHeader('Content-Type', 'application/json')
-      .setHeader('Cache-Control', 'no-store, no-cache, must-revalidate')
-      .send(text);
+    const data = await response.text();
+    return new Response(data, {
+      status: response.status,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store, no-cache, must-revalidate'
+      }
+    });
   } catch (err) {
-    res.status(500).json({ error: 'Proxy request failed', detail: String(err) });
+    return Response.json({ error: 'Proxy request failed', detail: String(err) }, { status: 500 });
   }
-};
+}
