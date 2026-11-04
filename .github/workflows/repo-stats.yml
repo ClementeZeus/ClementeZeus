@@ -1,32 +1,16 @@
 module.exports = async function handler(req, res) {
-  // 1. Prevent crashes if evaluated during build time or missing req object
-  if (!req) return;
+  const path = req.query.path;
 
-  // 2. Safely extract 'path' from req.query, with a fallback to parsing req.url if needed
-  let path = req.query && req.query.path;
-
-  if (!path && req.url) {
-    try {
-      const parsedUrl = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-      path = parsedUrl.searchParams.get('path');
-    } catch (e) {
-      // Ignore URL parsing errors if req.url is malformed
-    }
-  }
-
-  // 3. Validate path parameter
   if (!path) {
     res.status(400).json({ error: 'Missing path parameter' });
     return;
   }
 
-  // 4. Check for GitHub Token environment variable
   if (!process.env.GITHUB_TOKEN) {
     res.status(500).json({ error: 'GITHUB_TOKEN is not set in the Vercel project environment variables' });
     return;
   }
 
-  // 5. Proxy the request to the GitHub API
   try {
     const response = await fetch(`https://api.github.com/${path}`, {
       headers: {
