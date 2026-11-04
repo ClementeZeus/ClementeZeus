@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090a0f" />
+  <meta name="description" content="Live GitHub statistics for clementezeusgabriel01-iswrtg: contribution streak, top languages, repositories and recent commits." />
+  <title>Zeus's Stats · GitHub Stats</title>
+
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var theme = stored === 'light' || stored === 'dark'
+          ? stored
+          : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============ loading screen ============ -->
+  <div id="loading-screen" aria-hidden="false">
+    <div class="loader">
+      <svg class="loader-constellation" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line class="lc-line" x1="80" y1="22" x2="26" y2="120"></line>
+        <line class="lc-line" x1="80" y1="22" x2="134" y2="120"></line>
+        <line class="lc-line" x1="26" y1="120" x2="134" y2="120"></line>
+        <line class="lc-line lc-line--alt" x1="80" y1="22" x2="80" y2="78"></line>
+        <line class="lc-line lc-line--alt" x1="26" y1="120" x2="80" y2="78"></line>
+        <line class="lc-line lc-line--alt" x1="134" y1="120" x2="80" y2="78"></line>
+        <circle class="lc-node" cx="80" cy="22" r="6"></circle>
+        <circle class="lc-node" cx="26" cy="120" r="6"></circle>
+        <circle class="lc-node" cx="134" cy="120" r="6"></circle>
+        <circle class="lc-node lc-node--core" cx="80" cy="78" r="5"></circle>
+      </svg>
+      <p class="loader-text">
+        <span id="loader-status">Connecting to GitHub</span>
+        <span class="loader-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span>
+      </p>
+      <div class="loader-track"><div class="loader-bar" id="loader-bar"></div></div>
+    </div>
+  </div>
+
+  <!-- ============ fixed atmosphere ============ -->
+  <div class="bg-field" aria-hidden="true">
+    <div class="bg-aurora"></div>
+  </div>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scroll-progress-bar"></div>
+  </div>
+
+  <div class="page">
+
+    <header class="site-header" id="site-header">
+      <div class="header-inner">
+        <div class="brand">
+          <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <line class="bm-line" x1="20" y1="7" x2="8" y2="30"></line>
+            <line class="bm-line" x1="20" y1="7" x2="32" y2="30"></line>
+            <line class="bm-line" x1="8" y1="30" x2="32" y2="30"></line>
+            <circle class="bm-node" cx="20" cy="7" r="2.6"></circle>
+            <circle class="bm-node" cx="8" cy="30" r="2.6"></circle>
+            <circle class="bm-node" cx="32" cy="30" r="2.6"></circle>
+          </svg>
+          <span class="brand-name">Zeus<span class="brand-accent">.</span>Stats</span>
+        </div>
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path stroke-linecap="round" d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path></svg>
+          </button>
+          <a class="header-link" href="https://github.com/clementezeusgabriel01-iswrtg" target="_blank" rel="noopener">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.98 5.24.98 11.52c0 4.84 3.14 8.94 7.49 10.39.55.1.75-.24.75-.53 0-.26-.01-1.13-.02-2.04-3.05.66-3.69-1.3-3.69-1.3-.5-1.26-1.22-1.6-1.22-1.6-.998-.68.075-.67.075-.67 1.1.08 1.68 1.13 1.68 1.13.98 1.68 2.57 1.2 3.2.91.1-.71.38-1.2.7-1.47-2.44-.28-5-1.22-5-5.42 0-1.2.43-2.17 1.13-2.94-.11-.28-.49-1.4.11-2.92 0 0 .92-.3 3.02 1.12a10.5 10.5 0 0 1 5.5 0c2.1-1.42 3.02-1.12 3.02-1.12.6 1.52.22 2.64.11 2.92.7.77 1.13 1.74 1.13 2.94 0 4.21-2.56 5.14-5.01 5.41.39.34.74 1.02.74 2.05 0 1.48-.01 2.67-.01 3.03 0 .29.2.64.76.53A10.52 10.52 0 0 0 23.02 11.5C23.02 5.24 18.27.5 12 .5z"></path></svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ============ hero ============ -->
+      <section class="hero" data-reveal>
+        <svg class="hero-field" viewBox="0 0 440 320" fill="none" aria-hidden="true">
+          <line class="hf-line" x1="60" y1="40" x2="180" y2="100"></line>
+          <line class="hf-line" x1="180" y1="100" x2="140" y2="210"></line>
+          <line class="hf-line" x1="180" y1="100" x2="320" y2="70"></line>
+          <line class="hf-line" x1="320" y1="70" x2="380" y2="180"></line>
+          <line class="hf-line" x1="140" y1="210" x2="260" y2="260"></line>
+          <line class="hf-line" x1="260" y1="260" x2="380" y2="180"></line>
+          <circle class="hf-node" cx="60" cy="40" r="2.4" fill="#5b8cff"></circle>
+          <circle class="hf-node" cx="180" cy="100" r="3" fill="#5b8cff"></circle>
+          <circle class="hf-node" cx="140" cy="210" r="2.4" fill="#a78bfa"></circle>
+          <circle class="hf-node" cx="320" cy="70" r="2.4" fill="#a78bfa"></circle>
+          <circle class="hf-node" cx="380" cy="180" r="3" fill="#ffb454"></circle>
+          <circle class="hf-node" cx="260" cy="260" r="2.4" fill="#5b8cff"></circle>
+        </svg>
+        <p class="hero-eyebrow">Live repository telemetry</p>
+        <h1 class="hero-title">Everything <span class="accent-name">Zeus</span> has shipped, tracked in real time.</h1>
+        <p class="hero-sub">Totals, contribution streak, top languages, and public repositories — pulled straight from the GitHub API and refreshed every five minutes.</p>
+      </section>
+
+      <section id="current-repo" class="current-banner" hidden>
+        <div class="current-radar" aria-hidden="true">
+          <span class="ring"></span><span class="ring"></span><span class="dot"></span>
+        </div>
+        <div class="current-text">
+          <span class="current-label">Currently working on</span>
+          <a id="current-repo-link" class="current-repo-name" href="#" target="_blank" rel="noopener"></a>
+        </div>
+        <span id="current-repo-time" class="current-repo-time"></span>
+      </section>
+
+      <section id="totals" class="totals-strip">
+        <div class="total-orb">
+          <div class="orb-ring-wrap">
+            <svg viewBox="0 0 44 44"><circle class="orb-track" cx="22" cy="22" r="18"></circle><circle class="orb-arc" cx="22" cy="22" r="18"></circle></svg>
+          </div>
+          <div class="total-body">
+            <span class="total-value" id="total-repos" data-count="0">&mdash;</span>
+            <span class="total-label">Repositories</span>
+          </div>
+        </div>
+        <div class="total-orb">
+          <div class="orb-ring-wrap">
+            <svg viewBox="0 0 44 44"><circle class="orb-track" cx="22" cy="22" r="18"></circle><circle class="orb-arc" cx="22" cy="22" r="18"></circle></svg>
+          </div>
+          <div class="total-body">
+            <span class="total-value" id="total-stars" data-count="0">&mdash;</span>
+            <span class="total-label">Stars</span>
+          </div>
+        </div>
+        <div class="total-orb">
+          <div class="orb-ring-wrap">
+            <svg viewBox="0 0 44 44"><circle class="orb-track" cx="22" cy="22" r="18"></circle><circle class="orb-arc" cx="22" cy="22" r="18"></circle></svg>
+          </div>
+          <div class="total-body">
+            <span class="total-value" id="total-forks" data-count="0">&mdash;</span>
+            <span class="total-label">Forks</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="stats" class="stats-grid">
+        <div class="stat-card stat-card--streak">
+          <div class="stat-card-chrome">
+            <span class="chrome-dots"><span></span><span></span><span></span></span>
+            <h2 class="stat-card-title">Contribution streak</h2>
+          </div>
+          <div class="stat-card-body">
+            <img
+              src="profile/streak.svg"
+              alt="GitHub Streak Stats"
+              onerror="this.onerror=null; this.src='https://github-readme-streak-stats.herokuapp.com/?user=clementezeusgabriel01-iswrtg&theme=dark';"
+            />
+          </div>
+        </div>
+
+        <div class="stat-card stat-card--langs">
+          <div class="stat-card-chrome">
+            <span class="chrome-dots"><span></span><span></span><span></span></span>
+            <h2 class="stat-card-title">Top languages</h2>
+          </div>
+          <div class="stat-card-body">
+            <img
+              src="profile/top-langs.svg"
+              alt="Top Languages Stats"
+              onerror="this.onerror=null; this.src='https://github-readme-stats.vercel.app/api/top-langs/?username=clementezeusgabriel01-iswrtg&layout=compact&theme=dark';"
+            />
+          </div>
+        </div>
+
+        <div class="stat-card stat-card--graph">
+          <div class="stat-card-chrome">
+            <span class="chrome-dots"><span></span><span></span><span></span></span>
+            <h2 class="stat-card-title">Activity graph</h2>
+          </div>
+          <div class="stat-card-body">
+            <img
+              src="https://zeus-activity-graph.vercel.app/graph?username=clementezeusgabriel01-iswrtg&theme=react-dark&bg_color=0d1117&hide_border=true"
+              alt="GitHub Activity Graph"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="contributions" class="contrib-section">
+        <div class="terminal">
+          <div class="terminal-bar">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 17l6-6-6-6M12 19h8"></path></svg>
+            <span>contribution-log</span>
+            <span class="terminal-caret" aria-hidden="true"></span>
+          </div>
+          <div class="terminal-body">
+            <img
+              src="https://ghchart.rshah.org/5b8cff/clementezeusgabriel01-iswrtg"
+              alt="GitHub Contribution Graph"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="repos" class="repos-section">
+        <div class="repos-header">
+          <h2 class="section-title">Recent repositories</h2>
+          <select id="repo-sort" class="repo-sort" aria-label="Sort repositories">
+            <option value="updated">Recently updated</option>
+            <option value="stars">Most stars</option>
+            <option value="forks">Most forks</option>
+            <option value="name">Name</option>
+          </select>
+        </div>
+        <div id="repos-list" class="repos-grid">
+          <div class="repo-card skeleton">
+            <div class="skeleton-line w-half"></div>
+            <div class="skeleton-line w-three-quarter"></div>
+          </div>
+          <div class="repo-card skeleton">
+            <div class="skeleton-line w-half"></div>
+            <div class="skeleton-line w-three-quarter"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="commits" class="commits-section">
+        <h2 class="section-title">Recent commits</h2>
+        <div id="commits-list" class="commits-timeline">
+          <div class="commit-item skeleton">
+            <div class="skeleton-line w-half"></div>
+            <div class="skeleton-line w-three-quarter"></div>
+          </div>
+          <div class="commit-item skeleton">
+            <div class="skeleton-line w-half"></div>
+            <div class="skeleton-line w-three-quarter"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <svg class="footer-wave" viewBox="0 0 1200 40" preserveAspectRatio="none" aria-hidden="true">
+      <path fill="currentColor" d="M0,20 C150,45 350,0 600,18 C850,36 1050,4 1200,20 L1200,40 L0,40 Z"></path>
+    </svg>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span>Built by Zeus &copy; 2026.</span>
+        <span id="deploy-badge" class="deploy-badge"></span>
+        <span id="footer-updated" class="footer-updated"></span>
+      </div>
+    </footer>
+
+  </div>
+
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">
+    <svg class="btt-ring" viewBox="0 0 46 46" aria-hidden="true">
+      <circle class="btt-track" cx="23" cy="23" r="20"></circle>
+      <circle class="btt-arc" id="btt-arc" cx="23" cy="23" r="20" stroke-dasharray="0 126"></circle>
+    </svg>
+    <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 19V5M5 12l7-7 7 7"></path></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
+  
