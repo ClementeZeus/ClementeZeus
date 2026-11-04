@@ -92,9 +92,14 @@ html, body {
   scroll-behavior: smooth;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   transition: background-color 0.25s ease, color 0.25s ease;
   overflow-x: hidden;
+  width: 100%;
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -617,7 +622,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
 
 .totals-strip {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--sp-4);
   margin-bottom: var(--sp-6);
 }
@@ -662,7 +667,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
 
 .stats-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: var(--sp-4);
   margin-bottom: var(--sp-6);
 }
@@ -793,7 +798,7 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
 
 .repos-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--sp-4);
 }
 
@@ -854,6 +859,11 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  min-width: 0;
+}
+.repo-name span {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .repo-name:hover { color: var(--accent); }
 .repo-name svg { flex-shrink: 0; opacity: 0.55; transition: transform 0.2s var(--ease-spring); }
@@ -1060,6 +1070,9 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
   align-items: center;
   gap: 0.4rem;
   white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .deploy-badge::before {
   content: '';
@@ -1072,7 +1085,12 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
 .deploy-badge:empty { display: none; }
 .deploy-badge:empty::before { display: none; }
 
-.footer-updated { white-space: nowrap; }
+.footer-updated {
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* =========================================================================
    14 — back to top (scroll-ring button)
@@ -1129,7 +1147,8 @@ html[data-theme="light"] .theme-toggle .icon-moon { opacity: 1; transform: rotat
   .hero-field { width: 220px; height: 160px; opacity: 0.25; }
   .current-banner { flex-wrap: wrap; }
   .repos-header { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
-  .commit-item { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .commit-item { flex-direction: column; align-items: stretch; gap: 0.3rem; }
+  .commit-main { width: 100%; }
   .footer-inner { flex-direction: column; align-items: flex-start; }
   .back-to-top { right: 1rem; bottom: 1rem; width: 42px; height: 42px; }
   .back-to-top svg { width: 42px; height: 42px; }
