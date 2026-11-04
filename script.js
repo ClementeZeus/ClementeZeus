@@ -61,6 +61,7 @@
     const header = document.getElementById('site-header');
     const backToTop = document.getElementById('back-to-top');
     const arc = document.getElementById('btt-arc');
+    const footer = document.querySelector('.site-footer');
     const RING_CIRCUMFERENCE = 2 * Math.PI * 20;
 
     let ticking = false;
@@ -71,9 +72,13 @@
       const max = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = max > 0 ? Math.min(scrollTop / max, 1) : 0;
 
+      // Once the footer scrolls into view, the fixed button would sit on top
+      // of its text — hide it there instead of letting it overlap.
+      const footerOverlap = footer ? footer.getBoundingClientRect().top < window.innerHeight : false;
+
       if (progressBar) progressBar.style.width = `${ratio * 100}%`;
       if (header) header.classList.toggle('is-scrolled', scrollTop > 4);
-      if (backToTop) backToTop.classList.toggle('is-visible', scrollTop > 480);
+      if (backToTop) backToTop.classList.toggle('is-visible', scrollTop > 480 && !footerOverlap);
       if (arc) arc.style.strokeDasharray = `${ratio * RING_CIRCUMFERENCE} ${RING_CIRCUMFERENCE}`;
     }
 
@@ -516,5 +521,6 @@
 
   document.addEventListener('DOMContentLoaded', loadDashboard);
 })();
+
 
       
