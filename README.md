@@ -20,7 +20,7 @@ Here are some ideas to get you started:
 [![Portfolio](https://img.shields.io/badge/Portfolio-zeusgabrielmc--portfolio.netlify.app-000000?style=for-the-badge&logo=netlify&logoColor=white)](https://zeusgabrielmc-portfolio.netlify.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](#)
 ---
-### 📊 [Zeus's Stats Web Preview](https://zeus-project-stats.vercel.app/)
+### 📊 [Zeus's Stats Web Preview](https://clementezeus-stats.vercel.app/)
 
 <img width="1024" height="714" alt="Project Stats Web Prev" src="https://github.com/user-attachments/assets/659ddfdb-1eeb-48da-a1fb-cda02e14455e" />
 ---
