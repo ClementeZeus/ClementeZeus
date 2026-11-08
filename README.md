@@ -24,6 +24,7 @@ Here are some ideas to get you started:
 
 <img width="1024" height="714" alt="Project Stats Web Prev" src="https://github.com/user-attachments/assets/659ddfdb-1eeb-48da-a1fb-cda02e14455e" />
 ---
+
 I am a **1st-Year BSIT Student** with a focus on systems programming, networking, and distributed systems architecture. I enjoy building low-level tools, custom protocols, and storage engines from scratch using pure standard libraries.
 
 ---
