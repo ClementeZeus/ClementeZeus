@@ -13,7 +13,7 @@ Here are some ideas to get you started:
 - 😄 Pronouns: ...
 - ⚡ Fun fact: ...
 -->
-<img width="733" height="418" alt="image" src="https://github.com/user-attachments/assets/f8fe07f4-70af-4540-9f13-29290724d8bc" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/245cb636-2237-4dae-ae97-9c031628bffa" />
 
 # Hi there, I'm Zeus 👋 
 
